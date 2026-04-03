@@ -79,5 +79,17 @@ public class UserServiceImpl implements UserService{
         userRepository.delete(user);
     }
 
+//    @Override
+//    public String register(RegisterRequest request) {
+//        if(userRepository.findByEmail(request.email).isPresent()){
+//            return "Email already Exists!";
+//        }
+//    }
+//
+//    @Override
+//    public String login(LoginRequest request) {
+//        return "";
+//    }
+
 
 }

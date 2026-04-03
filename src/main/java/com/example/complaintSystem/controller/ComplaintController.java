@@ -55,4 +55,12 @@ public class ComplaintController {
     ) {
         return complaintService.updateComplaintStatus(complaintId, status, adminUserId);
     }
+
+    public Page<ComplaintResponseDto> getComplaintByStatus(
+            @PathVariable String status,
+            @RequestParam int page,
+            @RequestParam int size
+    ){
+        return complaintService.getComplaintsByStatus(status,page,size);
+    }
 }

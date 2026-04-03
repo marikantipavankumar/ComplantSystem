@@ -96,5 +96,18 @@ public class ComplaintServiceImpl implements ComplaintService {
         );
     }
 
+    public Page<ComplaintResponseDto> getComplaintsByStatus(String status,int page,int size){
+        if(status==null|| status.isBlank()){
+            throw new BadRequestException("status must not be Empty");
+        }
+
+        Pageable pageable = PageRequest.of(page,size,Sort.by("createdAt").descending());
+
+        return complaintRepository
+                .findByStatus(status.toUpperCase(),pageable)
+                .map(ComplaintMapper::toResponseDto);
+    }
+
 
 }
+
