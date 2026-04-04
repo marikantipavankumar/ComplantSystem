@@ -56,6 +56,7 @@ public class ComplaintController {
         return complaintService.updateComplaintStatus(complaintId, status, adminUserId);
     }
 
+    @GetMapping("/status/{status}")
     public Page<ComplaintResponseDto> getComplaintByStatus(
             @PathVariable String status,
             @RequestParam int page,

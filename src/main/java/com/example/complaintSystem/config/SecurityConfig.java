@@ -13,7 +13,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // allow POST/PUT/DELETE
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/**").permitAll() // allow your APIs
+                        .requestMatchers("/users/**", "/complaint/**").permitAll() // allow your APIs
                         .anyRequest().authenticated()
                 );
 

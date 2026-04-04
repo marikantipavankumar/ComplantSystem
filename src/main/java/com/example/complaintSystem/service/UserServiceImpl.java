@@ -5,6 +5,7 @@ import com.example.complaintSystem.entity.User;
 import com.example.complaintSystem.exception.BadRequestException;
 import com.example.complaintSystem.exception.ResourceNotFoundException;
 import com.example.complaintSystem.mapper.UserMapper;
+import com.example.complaintSystem.repository.ComplaintRepository;
 import com.example.complaintSystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
+    private final ComplaintRepository complaintRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, ComplaintRepository complaintRepository) {
         this.userRepository = userRepository;
+        this.complaintRepository = complaintRepository;
     }
 
     @Override
@@ -75,6 +78,10 @@ public class UserServiceImpl implements UserService{
 
         User user = userRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("User not found"));
+
+        if(complaintRepository.existsByUserId(id)){
+            throw new BadRequestException("Cannot delete user with existing complaints");
+        }
 
         userRepository.delete(user);
     }

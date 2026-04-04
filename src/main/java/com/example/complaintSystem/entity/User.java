@@ -1,6 +1,7 @@
 package com.example.complaintSystem.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -14,7 +15,8 @@ public class User {
     private String role;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Complaint> complaints;
     //getter and setters
     public Long getId() {
         return id;

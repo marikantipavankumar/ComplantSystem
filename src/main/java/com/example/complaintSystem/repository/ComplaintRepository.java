@@ -10,5 +10,5 @@ public interface ComplaintRepository extends JpaRepository<Complaint,Long> {
     Page<Complaint> findByStatus(String status, Pageable pageable);
 
 
-
+    boolean existsByUserId(Long id);
 }
